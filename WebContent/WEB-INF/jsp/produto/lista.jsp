@@ -1,4 +1,3 @@
-
 <%@page import="br.com.caelum.produtos.modelo.Produto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -31,33 +30,31 @@
 			<td>Usado?</td>
 			<td width="20%">Remover?</td>
 		</tr>
-		
-		
-		<c:forEach var="p" items="${produtoList}" varStatus="st">
-		
-			<tr id="produto${p.id}"> 
-				<td> ${st.count} </td>
-				<td> ${p.nome} </td>
-				<td> ${p.preco} </td>
-				<td> ${p.descricao} </td>
-				<td> ${p.dataInicioVenda.time}</td>
-				
-				<c:if test="${p.usado}">
-				  <td>sim</td>
-				</c:if>
-				<c:if test="${not p.usado}">
-				  <td>Não</td>
-				</c:if>
-				<td><a href ="#" onclick="return removeProduto(${p.id})">Remover</a></td>
+
+
+		<c:forEach var="p" items="${produtoList}">
+
+			<tr id="produto${p.id}">
+				<td>${p.nome}</td>
+				<td>${p.preco}</td>
+				<td>${p.descricao}</td>
+				<td>${p.dataInicioVenda.time}</td>
+
+				<c:choose>
+					<c:when test="${p.usado}">
+						<td>Sim</td>
+					</c:when>
+					<c:otherwise>
+						<td>Não</td>
+					</c:otherwise>
+				</c:choose>
+
+				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
 			</tr>
-			
-			
 		</c:forEach>
-			
 	</table>
-			
-			<a href="<c:url value='/produto/formulario'></c:url>">Adicionar um produto</a>
-	
-	
+
+	<a href="<c:url value='/produto/formulario'></c:url>">Adicionar um produto</a>
+
 </body>
 </html>
